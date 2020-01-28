@@ -2,37 +2,26 @@
 
 Hey there! Glad you are here and welcome to `GraphQL Pagination` tutorial. The goal of this tutorial is to guide you through setting up your pagination using `graphql`.
 
-### What's GeaphQL
+## Offset Pagination
 
-__GraphQL__ according to official documentation, is a query language for your API, and a server-side runtime for executing queries by using a type system you define for your data. GraphQL isn't tied to any specific database or storage engine and is instead backed by your existing code and data.
+Now that you have your blog up and running, you notice that you are querying all your posts. This is not efficient, especially if you go over a 100 blog posts. Your SQL query will grow by time and spend then more time to execute.
 
-### Pagination
+To solve the problem, by default as someone who knows SQL well, you will probably think of paginating. The way you do it is by adding two arguments to your SQL query `offset` and `limit`. You are greatly correct about what you are thinking right now. Yes you are again correct, you can do this in your graphql code base.
 
-Now that you have your blog up and running, you notice that you are querying all your posts. This is not efficient, especially if you go over a 100 blog post. Your SQL query will grow by time and spend then more time to execute.
+Allow me to show you an example of fetching 10 blog posts from all your posts starting from the 11th one. Your query will look like this:
 
-To solve the problem, by default as someone who knows SQL well, you will probably think of paginating. The way you do it is by adding two arguments to your SQL query `offset` and `limit`. You are greatly correct about what you are thinking right now, and yes you are again correct, you can do this in your graphql code base.
-
-Lets imagine that you have this schema:
-
-```
-type Post {
-  title: String,
-  content: String
+```javascript
+query {
+  posts(limit: 10, offset: 10) {
+    title,
+    content
+  }
 }
 ```
 
-You query to get all posts will mostly look something like this:
+Until now everything seems to be working, this type of pagination works great if you have either a static or small data. It results into a good user experience for quickly fetching the next page data.
 
-```
-type Query {
-  posts: [Post]
-}
-```
+But, this approach have its downsides and issues that needs to be addressed.
 
-To add pagination to your query you will have to add the arguments you thought of before, then your query will be like this:
+### Performance
 
-```
-type Query {
-  posts(limit: Int, offset: Int): [Post]
-}
-```
