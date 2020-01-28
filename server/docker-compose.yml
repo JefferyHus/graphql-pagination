@@ -1,0 +1,21 @@
+version: '3.7'
+
+services: 
+  # Node server application
+  server:
+    image: pagination/cursor
+    container_name: pagination_cursor_container
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: 
+      - .:/usr/src/app
+    ports: 
+      - 4000:4000
+  database:
+    image: postgres:12.1
+    container_name: database_development
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo_database

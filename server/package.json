@@ -1,0 +1,19 @@
+{
+  "name": "pagination",
+  "version": "1.0.0",
+  "description": "graphql pagination tutorial",
+  "main": "index.js",
+  "author": "Jaafari El Housseine <jefferytutorials@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "apollo-server": "^2.9.16",
+    "faker": "^4.1.0",
+    "graphql": "^14.6.0",
+    "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "sequelize-cli": "^5.5.1"
+  }
+}
