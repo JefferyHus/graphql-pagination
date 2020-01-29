@@ -48,7 +48,7 @@ You see?! It's bad right, just like if you want to start reading a book from a c
 
 Don't worry, we got your back with a better solution :sunglasses:
 
-# Cursor pagination (a.k.a Relay-style/keyset)
+# Cursor pagination
 
 This approach tend to set a pointer to a specific record in your datatable. For it to work at its finest, the cursor must be unique and sequential. What this does, is that you will always fetch data after a certain row instead of relying in the positioning of rows inside your table.
 
@@ -71,8 +71,8 @@ Looking at your resolver, it will look like this:
 
 ```javascript
 {
-  posts(parent, { limit, publisherId, cursor }) {
-    return Posts.findAll({
+  async posts(parent, { limit, publisherId, cursor }) {
+    return await Posts.findAll({
       where: {
         publisherId,
         createdAt: {
@@ -84,4 +84,30 @@ Looking at your resolver, it will look like this:
   }
 }
 ```
+
+Cursor based pagination is more performant than offsets because we can leverage database indexes on the columns in the where clause that are being used as cursors.
+
+### Relay style pagination
+
+Relay is a framework for building data driven React apps. Relay provides a standard mechanism to slice data and paginate the results.
+
+```javascript
+query {
+  posts(first: 10, after: "cursor") {
+    edges {
+      cursor
+      node {
+        id
+        title
+        content
+      }
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+```
+
+Here, slicing is done using the first argument. This is similar to the limit which we had applied in the earlier queries. Pagination is done using the after argument, which will pass a cursor expecting results to be after that cursor. It also asks for hasNextPage which tells the client whether there are more results, since there is no concept of total number of pages in Cursor pagination.
 

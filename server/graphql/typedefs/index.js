@@ -5,17 +5,29 @@ const userType = gql`
     id: ID,
     firstName: String,
     lastName: String,
-    createdAt: Date
+    createdAt: String
   }
 
   type Query {
-    user(!id): User,
-    users: [User]
+    user(!id): User
+  }
+`;
+
+const postType = gql`
+  type Post {
+    id: ID,
+    title: String,
+    content: String,
+    publisherId: ID,
+    createdAt: String
+  }
+
+  type Query {
+    posts(!limit, !publisherId, !cursor): [Post]
   }
 `;
 
 module.exports = {
-  typedefs: [
-    userType
-  ]
+  userType,
+  postType
 }

@@ -1,28 +1,20 @@
-const { Users, Op } = require('../../models');
+const { Users, Posts, Op } = require('../../models');
 const { GraphQLID, GraphQLList, GraphQLString } = require('graphql');
 const { userType } = require('../typedefs');
 
 module.exports = {
-  user: {
-    type: userType,
-    args: {
-      id: { type: GraphQLID }
-    },
-    async resolve(parent, { id }) {
-      await Users.findByPk(id);
-    }
+  async user(parent, { id }) {
+    return await Users.findByPk(id);
   },
-  users: {
-    type: new GraphQLList(userType),
-    args: {
-      cursor: { type: GraphQLString }
-    },
-    async resolve(parent, { cursor }) {
-      await Users.findAll({
-        where: {
+  async posts(parent, { limit, publisherId, cursor }) {
+    return await Posts.findAll({
+      where: {
+        publisherId,
+        createdAt: {
           [Op.gt]: cursor
         }
-      });
-    }
+      },
+      limit
+    });
   }
 }
