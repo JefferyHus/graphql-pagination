@@ -111,3 +111,35 @@ query {
 
 Here, slicing is done using the first argument. This is similar to the limit which we had applied in the earlier queries. Pagination is done using the after argument, which will pass a cursor expecting results to be after that cursor. It also asks for hasNextPage which tells the client whether there are more results, since there is no concept of total number of pages in Cursor pagination.
 
+
+# Conclusion
+
+We saw both different pagination styles, and walked trough both. To conclude our tutorial, let's list again what each approach offers.
+
+#### Offset
+
+**Pros**
+
+- It gives you the ability to see the total number of pages and their progress through that total.
+- It gives you the ability to jump to a specific page within the set.
+- It’s easy to implement as long as there is an explicit ordering of the results from a query.
+
+**Cons**
+
+- Using LIMIT <count> OFFSET <offset> doesn’t scale well for large datasets. As the offset increases the farther you go within the dataset, the database still has to read up to offset + count rows from disk, before discarding the offset and only returning count rows.
+- If items are being written to the dataset at a high frequency, the page window becomes unreliable, potentially skipping or returning duplicate results.
+
+#### Cursor
+
+**Pros**
+- This will scale well for large datasets. We’re using a WHERE clause to fetch rows with `index` values less than the last `index` from the previous page. This lets us leverage the index on the column and the database doesn’t have to read any rows that we’ve already seen. We’re also not returning the total number of pages or items in the set, so we avoid having to calculate the full result set on each request.
+- The pagination process is stabilized. Instead of calculating from scratch on each request based on the total number of items, we’re always fetching the next count rows after a specific reference point. If items are being written to the dataset at a high frequency, the overall position of the cursor in the set might change, but the pagination window adjusts accordingly.
+
+**Cons**
+- The cursor must be based on a unique, sequential column (or columns) in the source table.
+- There is no concept of the total number of pages or results in the set.
+- The client can’t jump to a specific page.
+
+With that said, I hope you enjoyed reading the article and understood the differences between both approches :smile:
+
+Brought to you by :heart:
