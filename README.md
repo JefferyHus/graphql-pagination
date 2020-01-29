@@ -118,16 +118,16 @@ We saw both different pagination styles, and walked trough both. To conclude our
 
 ## Offset
 
-**Pros**
++ **Pros**
 
-- It gives you the ability to see the total number of pages and their progress through that total.
-- It gives you the ability to jump to a specific page within the set.
-- It’s easy to implement as long as there is an explicit ordering of the results from a query.
+* It gives you the ability to see the total number of pages and their progress through that total.
+* It gives you the ability to jump to a specific page within the set.
+* It’s easy to implement as long as there is an explicit ordering of the results from a query.
 
-**Cons**
+- **Cons**
 
-- Using LIMIT <count> OFFSET <offset> doesn’t scale well for large datasets. As the offset increases the farther you go within the dataset, the database still has to read up to offset + count rows from disk, before discarding the offset and only returning count rows.
-- If items are being written to the dataset at a high frequency, the page window becomes unreliable, potentially skipping or returning duplicate results.
+* Using LIMIT <count> OFFSET <offset> doesn’t scale well for large datasets. As the offset increases the farther you go within the dataset, the database still has to read up to offset + count rows from disk, before discarding the offset and only returning count rows.
+* If items are being written to the dataset at a high frequency, the page window becomes unreliable, potentially skipping or returning duplicate results.
 
 ## Cursor
 
