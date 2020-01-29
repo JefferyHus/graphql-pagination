@@ -118,16 +118,16 @@ We saw both different pagination styles, and walked trough both. To conclude our
 
 ## Offset
 
-+ **Pros**
+**Pros**
 
-* It gives you the ability to see the total number of pages and their progress through that total.
-* It gives you the ability to jump to a specific page within the set.
-* It’s easy to implement as long as there is an explicit ordering of the results from a query.
+- It gives you the ability to see the total number of pages and their progress through that total.
+- It gives you the ability to jump to a specific page within the set.
+- It’s easy to implement as long as there is an explicit ordering of the results from a query.
 
-- **Cons**
+**Cons**
 
-* Using LIMIT <count> OFFSET <offset> doesn’t scale well for large datasets. As the offset increases the farther you go within the dataset, the database still has to read up to offset + count rows from disk, before discarding the offset and only returning count rows.
-* If items are being written to the dataset at a high frequency, the page window becomes unreliable, potentially skipping or returning duplicate results.
+- Using LIMIT <count> OFFSET <offset> doesn’t scale well for large datasets. As the offset increases the farther you go within the dataset, the database still has to read up to offset + count rows from disk, before discarding the offset and only returning count rows.
+- If items are being written to the dataset at a high frequency, the page window becomes unreliable, potentially skipping or returning duplicate results.
 
 ## Cursor
 
@@ -139,6 +139,13 @@ We saw both different pagination styles, and walked trough both. To conclude our
 - The cursor must be based on a unique, sequential column (or columns) in the source table.
 - There is no concept of the total number of pages or results in the set.
 - The client can’t jump to a specific page.
+
+
+P.S.:
+
+This image shows the differences between both approaches.
+
+![cursor vs offset](https://image.slidesharecdn.com/overviewofgraphqlclients-171129103338/95/overview-of-graphql-clients-73-638.jpg?cb=1511951684)
 
 With that said, I hope you enjoyed reading the article and understood the differences between both approches :smile:
 
