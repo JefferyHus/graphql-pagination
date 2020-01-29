@@ -116,7 +116,7 @@ Here, slicing is done using the first argument. This is similar to the limit whi
 
 We saw both different pagination styles, and walked trough both. To conclude our tutorial, let's list again what each approach offers.
 
-#### Offset
+## Offset
 
 **Pros**
 
@@ -129,7 +129,7 @@ We saw both different pagination styles, and walked trough both. To conclude our
 - Using LIMIT <count> OFFSET <offset> doesn’t scale well for large datasets. As the offset increases the farther you go within the dataset, the database still has to read up to offset + count rows from disk, before discarding the offset and only returning count rows.
 - If items are being written to the dataset at a high frequency, the page window becomes unreliable, potentially skipping or returning duplicate results.
 
-#### Cursor
+## Cursor
 
 **Pros**
 - This will scale well for large datasets. We’re using a WHERE clause to fetch rows with `index` values less than the last `index` from the previous page. This lets us leverage the index on the column and the database doesn’t have to read any rows that we’ve already seen. We’re also not returning the total number of pages or items in the set, so we avoid having to calculate the full result set on each request.
