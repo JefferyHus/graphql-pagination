@@ -11,7 +11,7 @@ If you have `docker-compose` installed then follow this steps:
 - `./node_modules/.bin/sequelize db:migrate` or `npx sequelize db:migrate`
 - `./node_modules/.bin/sequelize db:seed:all` or `npx sequelize db:seed:all`
 
-If you don't have docker installed in your machine, please refer to (this article)[https://www.pgadmin.org/download/] and install your local postgresql client.
+If you don't have docker installed in your machine, please refer to (https://www.pgadmin.org/download/)[this article] and install your local postgresql client.
 
 Make sure that you create a user with the following credentials:
 
