@@ -31,7 +31,7 @@ But, this approach have its downsides and issues that needs to be addressed.
 
 As mentioned before, in small datasets, the offset approach is good for you and will not break the user experience.
 
-But as the data grows in your database and you are trying to fetch the farthest of the results :weary: it will take longer than you can imagine (You may :cry:).
+But as the data grows in your dataset and you are trying to fetch the farthest of the results :weary: it will take longer than you can imagine (You may :cry:).
 
 But how? (you ask). Let's break it down easily, take this query as an example:
 
@@ -44,9 +44,9 @@ query {
 }
 ```
 
-The query is fetching 10 posts with an offset of 10K, in a first glance you think that's it,your database engine will directly understand the offset and start querying from that row.
+The query is fetching 10 posts with an offset of 10K, in a first glance you think that's it, your database engine will directly understand the offset and start querying from that row.
 
-Well ! That won't happen because the way a `relational` database engine works, is that it will still have to compute all the skipped rows inside the server; therefore a large OFFSET might be inefficient.
+Well! That won't happen because the way a `relational` database engine works, is that it will still have to compute all the skipped rows inside the server; therefore a large OFFSET might be inefficient.
 
 You see?! It's bad right, just like if you want to start reading a book from a certain page but you still have to go over every page and count it yourself without the use of an index.
 
