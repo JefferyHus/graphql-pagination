@@ -91,6 +91,8 @@ Looking at your resolver, it will look like this:
 
 Cursor based pagination is more performant than offsets because we can leverage database indexes on the columns in the where clause that are being used as cursors.
 
+There is more to this solution, and many libraries and frameworks out there are presenting you with their own cursor style pagination; But we can't go over each of if, we will stick to the one that is most used with `React`.
+
 ### Relay style pagination
 
 Relay is a framework for building data driven React apps. Relay provides a standard mechanism to slice data and paginate the results.
@@ -118,7 +120,7 @@ Here, slicing is done using the first argument. This is similar to the limit whi
 
 # Recap
 
-We saw both different pagination styles, and walked trough both. To recap our tutorial, let's list again what each approach offers.
+We learned two different pagination styles, and walked trough both of it. To recap our tutorial, let's list again what each approach offers.
 
 ## Offset
 
@@ -147,17 +149,15 @@ We saw both different pagination styles, and walked trough both. To recap our tu
 - The client can’t jump to a specific page.
 
 
-P.S.:
-
-This image shows the differences between both approaches.
+P.S.: This image shows the differences between both approaches.
 
 ![cursor vs offset](https://image.slidesharecdn.com/overviewofgraphqlclients-171129103338/95/overview-of-graphql-clients-73-638.jpg?cb=1511951684)
 
 
 # Dictionnary
 
-(1): OFFSET says to skip that many rows before beginning to return rows.
-(2): LIMIT is an optional clause of the SELECT statement that returns a subset of rows returned by the query.
+- <font size="2">(1): OFFSET says to skip that many rows before beginning to return rows.</font>
+- <font size="2">(2): LIMIT is an optional clause of the SELECT statement that returns a subset of rows returned by the query.</font>
 
 With that said, I hope you enjoyed reading the article and understood the differences between both approches :smile:
 
