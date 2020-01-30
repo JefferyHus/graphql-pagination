@@ -2,7 +2,9 @@
 
 Hey there! Glad you are here and welcome to `GraphQL Pagination` tutorial. The goal of this tutorial is to guide you through setting up your pagination using `graphql`.
 
-In `graphql` there are two major approches, the first one is `offset style` and the second one goes by `cursor style`. Let's go together and start by the easiest one.
+In `graphql` there are two major approches, the first one is `offset style` and the second one goes by `cursor style`.
+
+As a **Ninja** once said "行きましょ" :see_no_evil:.
 
 ## Offset Pagination
 
