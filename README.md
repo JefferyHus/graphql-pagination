@@ -2,11 +2,13 @@
 
 Hey there! Glad you are here and welcome to `GraphQL Pagination` tutorial. The goal of this tutorial is to guide you through setting up your pagination using `graphql`.
 
+In `graphql` there are two major approches, the first one is `offset style` and the second one goes by `cursor style`. Let's go together and start by the easiest one.
+
 ## Offset Pagination
 
 Now that you have your blog up and running, you notice that you are querying all your posts. This is not efficient, especially if you go over a 100 blog posts. Your SQL query will grow by time and spend then more time to execute.
 
-To solve the problem, by default as someone who knows SQL well, you will probably think of paginating. The way you do it is by adding two arguments to your SQL query `offset` and `limit`. You are greatly correct about what you are thinking right now. Yes you are again correct, you can do this in your graphql code base.
+To solve the problem, by default as someone who knows SQL well, you will probably think of pagination. The way you do it is by adding two arguments to your SQL query `offset`<sup>1</sup> and `limit`<sup>2</sup>. You are asking right now about how to achieve this in your `graphql` server.
 
 Allow me to show you an example of fetching 10 blog posts from all your posts starting from the 11th one. Your query will look like this:
 
@@ -112,9 +114,9 @@ query {
 Here, slicing is done using the first argument. This is similar to the limit which we had applied in the earlier queries. Pagination is done using the after argument, which will pass a cursor expecting results to be after that cursor. It also asks for hasNextPage which tells the client whether there are more results, since there is no concept of total number of pages in Cursor pagination.
 
 
-# Conclusion
+# Recap
 
-We saw both different pagination styles, and walked trough both. To conclude our tutorial, let's list again what each approach offers.
+We saw both different pagination styles, and walked trough both. To recap our tutorial, let's list again what each approach offers.
 
 ## Offset
 
@@ -132,10 +134,12 @@ We saw both different pagination styles, and walked trough both. To conclude our
 ## Cursor
 
 **Pros**
+
 - This will scale well for large datasets. We’re using a WHERE clause to fetch rows with `index` values less than the last `index` from the previous page. This lets us leverage the index on the column and the database doesn’t have to read any rows that we’ve already seen. We’re also not returning the total number of pages or items in the set, so we avoid having to calculate the full result set on each request.
 - The pagination process is stabilized. Instead of calculating from scratch on each request based on the total number of items, we’re always fetching the next count rows after a specific reference point. If items are being written to the dataset at a high frequency, the overall position of the cursor in the set might change, but the pagination window adjusts accordingly.
 
 **Cons**
+
 - The cursor must be based on a unique, sequential column (or columns) in the source table.
 - There is no concept of the total number of pages or results in the set.
 - The client can’t jump to a specific page.
@@ -147,6 +151,12 @@ This image shows the differences between both approaches.
 
 ![cursor vs offset](https://image.slidesharecdn.com/overviewofgraphqlclients-171129103338/95/overview-of-graphql-clients-73-638.jpg?cb=1511951684)
 
+
+# Dictionnary
+
+(1): OFFSET says to skip that many rows before beginning to return rows.
+(2): LIMIT is an optional clause of the SELECT statement that returns a subset of rows returned by the query.
+
 With that said, I hope you enjoyed reading the article and understood the differences between both approches :smile:
 
-Brought to you by :heart:
+Brought to you with :heart:

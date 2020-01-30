@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     publisherId: DataTypes.INTEGER
   }, {});
   Posts.associate = function(models) {
-    Posts.belongsto(models.Users, {foreignKey: 'publisherId', as: 'posts'});
+    Posts.belongsTo(models.Users, {foreignKey: 'publisherId', as: 'posts'});
   };
   return Posts;
 };

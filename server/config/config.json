@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
+    "username": "manager",
     "password": "demo",
     "database": "database_development",
-    "host": "127.0.0.1",
+    "host": "database",
     "dialect": "postgres",
     "operatorsAliases": false
   }

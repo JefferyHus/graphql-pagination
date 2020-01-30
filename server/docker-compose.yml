@@ -17,5 +17,11 @@ services:
     container_name: database_development
     restart: always
     environment:
+      POSTGRES_USER: manager
       POSTGRES_PASSWORD: demo
       POSTGRES_DB: demo_database
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 4400:8080
