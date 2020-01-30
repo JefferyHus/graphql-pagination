@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
     publisherId: DataTypes.INTEGER
-  }, {});
+  }, {
+    timestamps: false
+  });
   Posts.associate = function(models) {
     Posts.belongsTo(models.Users, {foreignKey: 'publisherId', as: 'posts'});
   };

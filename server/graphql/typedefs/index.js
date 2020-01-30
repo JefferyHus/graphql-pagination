@@ -5,7 +5,7 @@ const typeDefs = gql`
     id: ID
     firstName: String
     lastName: String
-    createdAt: String
+    posts: [Post]
   }
 
   type Post {
@@ -13,12 +13,13 @@ const typeDefs = gql`
     title: String
     content: String
     publisherId: ID
-    createdAt: String
+    author: User
   }
 
   type Query {
-    user: User
-    posts: [Post]
+    user(id: ID!): User
+    postsOffset(limit: Int!, offset: Int!): [Post]
+    postsCursor(limit: Int!, publisherId: Int!, cursor: Int!): [Post]
   }
 `;
 

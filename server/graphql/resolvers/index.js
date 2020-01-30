@@ -5,11 +5,17 @@ module.exports = {
     user: async (parent, { id }) => {
       return await Users.findByPk(id);
     },
-    posts: async (parent, { limit, publisherId, cursor }) => {
+    postsOffset: async (parent, { limit, offset }) => {
+      return await Posts.findAll({
+        offset,
+        limit
+      });
+    },
+    postsCursor: async (parent, { limit, publisherId, cursor }) => {
       return await Posts.findAll({
         where: {
           publisherId,
-          createdAt: {
+          id: {
             [Op.gt]: cursor
           }
         },

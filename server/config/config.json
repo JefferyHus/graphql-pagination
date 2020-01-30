@@ -2,7 +2,7 @@
   "development": {
     "username": "manager",
     "password": "demo",
-    "database": "database_development",
+    "database": "demo_database",
     "host": "database",
     "dialect": "postgres",
     "operatorsAliases": false

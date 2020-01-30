@@ -6,8 +6,16 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
    return queryInterface.bulkInsert('Users', [
      {
-       firstName: faker.fake("{{name.firstName}}"),
-       lastName: faker.fake("{{name.lastName}}")
+      firstName: faker.fake("{{name.firstName}}"),
+      lastName: faker.fake("{{name.lastName}}"),
+      createdAt: Math.floor(Date.now()/1000),
+      updatedAt: Math.floor(Date.now()/1000)
+     },
+     {
+      firstName: faker.fake("{{name.firstName}}"),
+      lastName: faker.fake("{{name.lastName}}"),
+      createdAt: Math.floor(Date.now()/1000),
+      updatedAt: Math.floor(Date.now()/1000)
      }
    ]);
   },

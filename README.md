@@ -60,14 +60,14 @@ Let's have an example to understand this more:
 
 ```javascript
 query {
-  posts(limit: 10, publisherId: 1, cursor: 1580259485) {
+  posts(limit: 10, publisherId: 1, cursor: 1) {
     title,
     content
   }
 }
 ```
 
-The query will skip all the 24th rows and returns the next 10 results in your dataset after the value of your `cursor`. **The `cursor` here refers to the `createdAt` timestamp.**
+The query will skip all the 24th rows and returns the next 10 results in your dataset after the value of your `cursor`. **The `cursor` here refers to the `id` of our posts.**
 
 Looking at your resolver, it will look like this:
 
@@ -79,7 +79,7 @@ Looking at your resolver, it will look like this:
     return await Posts.findAll({
       where: {
         publisherId,
-        createdAt: {
+        id: {
           [Op.gt]: cursor
         }
       },
