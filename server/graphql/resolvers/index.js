@@ -22,5 +22,19 @@ module.exports = {
         limit
       });
     }
+  },
+  User: {
+    posts: async (parent) => {
+      return await Posts.findAll({
+        where: {
+          publisherId: parent.id
+        }
+      })
+    }
+  },
+  Post: {
+    author: async (parent) => {
+      return await Users.findByPk(parent.publisherId)
+    }
   }
 }
