@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "apollo-server": "^2.25.3",
+    "apollo-server": "^2.25.4",
     "faker": "^4.1.0",
     "graphql": "^14.6.0",
     "pg": "^7.18.0",
